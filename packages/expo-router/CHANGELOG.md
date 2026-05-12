@@ -7,6 +7,7 @@
 ### 🎉 New features
 
 - Add a name to injected suspense boundaries for easier debugging ([#45501](https://github.com/expo/expo/pull/45501) by [@rubennorte](https://github.com/rubennorte))
+- add preventSelection prop to tabs ([#45671](https://github.com/expo/expo/pull/45671) by [@Ubax](https://github.com/Ubax))
 
 ### 🐛 Bug fixes
 

@@ -47,6 +47,7 @@ export interface NativeTabOptions extends DefaultRouterOptions {
     };
     indicatorColor?: ColorValue;
     hidden?: boolean;
+    preventSelection?: boolean;
     specialEffects?: TabsScreenProps['specialEffects'];
     nativeProps?: NativeScreenProps;
     disableAutomaticContentInsets?: boolean;
@@ -343,6 +344,20 @@ export interface NativeTabTriggerProps {
      * @platform iOS
      */
     disableScrollToTop?: boolean;
+    /**
+     * If `true`, prevents native tab selection. Tapping the tab in the tab bar
+     * does not change the focused tab.
+     *
+     * > **Note:** Unlike `hidden`, the tab remains visible in the tab bar. Only
+     * > the native focus change is suppressed - JavaScript navigation
+     * > (for example, `router.push()` or `<Link />`) still navigates to the tab.
+     *
+     * @default false
+     *
+     * @platform android
+     * @platform ios
+     */
+    preventSelection?: boolean;
     /**
      * The children of the trigger.
      *
