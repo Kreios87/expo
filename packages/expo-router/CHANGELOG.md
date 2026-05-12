@@ -7,6 +7,7 @@
 ### 🎉 New features
 
 - Add a name to injected suspense boundaries for easier debugging ([#45501](https://github.com/expo/expo/pull/45501) by [@rubennorte](https://github.com/rubennorte))
+- Add `tabBarRespectsIMEInsets` Android property to `NativeTabs` ([#45679](https://github.com/expo/expo/pull/45679) by [@Ubax](https://github.com/Ubax))
 
 ### 🐛 Bug fixes
 
