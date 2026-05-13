@@ -76,6 +76,7 @@ module Expo
     @framework_owner_map = nil          # Hash: framework_name -> owning_pod_name
     @failed_remote_downloads = Set.new
     @warned_no_prebuilt_react = false
+    @status_cache = nil                 # Hash: pod_name -> resolve_prebuilt_status result
 
     class << self
       # Returns the build flavor (debug/release) for precompiled modules.
@@ -1792,6 +1793,11 @@ module Expo
       # A pod may use a prebuilt xcframework only when its own prebuilt artifact
       # exists and every local Expo dependency also uses prebuilt.
       def resolve_prebuilt_status(pod_name, visiting = Set.new)
+        return _resolve_prebuilt_status_uncached(pod_name, visiting) unless visiting.empty?
+        (@status_cache ||= {})[pod_name] ||= _resolve_prebuilt_status_uncached(pod_name, visiting)
+      end
+
+      def _resolve_prebuilt_status_uncached(pod_name, visiting)
         return { available: false, reason: :build_from_source } if build_from_source?(pod_name)
         return { available: true } if visiting.include?(pod_name)
 

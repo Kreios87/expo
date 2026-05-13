@@ -10,6 +10,8 @@
 
 ### 💡 Others
 
+- [iOS] Cache prebuilt module status lookups to reduce repeated `File.exist?` calls during `pod install`.
+
 ## 56.0.4 — 2026-05-11
 
 _This version does not introduce any user-facing changes._
