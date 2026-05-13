@@ -6,6 +6,8 @@
 
 ### 🎉 New features
 
+- [iOS] `Decodable` types can now be used as native function arguments. JS values are decoded through the dynamic-type registry, so arrays, dictionaries, optionals, `RawRepresentable` enums and `Convertible`s are coerced consistently. ([#45705](https://github.com/expo/expo/pull/45705) by [@tsapeta](https://github.com/tsapeta))
+
 ### 🐛 Bug fixes
 
 - [iOS] Fix encoding `Encodable` function results so arrays, dictionaries, optionals, `RawRepresentable` enums and `Convertible`s route through their dynamic types instead of producing wrong shapes. ([#45575](https://github.com/expo/expo/pull/45575) by [@tsapeta](https://github.com/tsapeta))
