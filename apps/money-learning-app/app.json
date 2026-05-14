@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "How Money Works",
+    "slug": "money-learning-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFD700"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

@@ -1,0 +1,232 @@
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+// --- SCREEN 1: SPLASH SCREEN ---
+function SplashScreen({ navigation }) {
+  useEffect(() => {
+    // Automatically move to the Login screen after 3 seconds
+    const timer = setTimeout(() => {
+      navigation.replace('Login');
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <View style={[styles.container, { backgroundColor: '#FFD700' }]}>
+      <Text style={styles.titleText}>How Money Works</Text>
+      <Text style={styles.subtitleText}>Loading...</Text>
+    </View>
+  );
+}
+
+// --- SCREEN 2: LOGIN SCREEN ---
+function LoginScreen({ navigation }) {
+  return (
+    <View style={[styles.container, { backgroundColor: '#87CEEB' }]}>
+      <Text style={styles.titleText}>How would you like to log in?</Text>
+
+      <TouchableOpacity
+        style={styles.chunkyButton}
+        onPress={() => navigation.replace('Hub')}
+        accessible={true}
+        accessibilityLabel="Log in with Face ID">
+        <Text style={styles.buttonText}>Face ID / Fingerprint</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.chunkyButton}
+        onPress={() => navigation.replace('Hub')}
+        accessible={true}
+        accessibilityLabel="Log in with a PIN code">
+        <Text style={styles.buttonText}>4-Digit PIN</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.chunkyButton}
+        onPress={() => navigation.replace('Hub')}
+        accessible={true}
+        accessibilityLabel="Log in with picture password">
+        <Text style={styles.buttonText}>Picture Password</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+// --- SCREEN 3: MAIN HUB ---
+function HubScreen({ navigation }) {
+  const [stars, setStars] = useState(0);
+
+  return (
+    <View style={[styles.container, { backgroundColor: '#F0F8FF' }]}>
+      <View style={styles.starJar}>
+        <Text style={styles.starText}>⭐ Star Jar: {stars}</Text>
+      </View>
+
+      <Text style={styles.titleText}>Welcome back!</Text>
+
+      <TouchableOpacity
+        style={[styles.chunkyButton, { backgroundColor: '#FFA500' }]}
+        onPress={() => navigation.navigate('LearningRoom')}
+        accessible={true}
+        accessibilityLabel="Go to the Learning Room">
+        <Text style={styles.buttonText}>💡 The Learning Room</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.chunkyButton, { backgroundColor: '#32CD32' }]}
+        onPress={() => Alert.alert('Coming Soon', 'The shop is currently being built!')}
+        accessible={true}
+        accessibilityLabel="Go to the Little Money Shop">
+        <Text style={styles.buttonText}>🏪 The Little Money Shop</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+// --- SCREEN 4: THE LEARNING ROOM ---
+function LearningRoomScreen() {
+  const handleCoinPress = (coinName: string, value: string) => {
+    Alert.alert(`This is a ${coinName}`, `It is worth ${value}.`);
+  };
+
+  return (
+    <View style={[styles.container, { backgroundColor: '#FFF8DC' }]}>
+      <Text style={styles.titleText}>Meet the Coins</Text>
+      <Text style={styles.subtitleText}>Tap a coin to learn its name!</Text>
+
+      <View style={styles.coinRow}>
+        <TouchableOpacity
+          style={styles.coinBronze}
+          onPress={() => handleCoinPress('One Penny', '1p')}
+          accessible={true}
+          accessibilityLabel="One penny coin">
+          <Text style={styles.coinText}>1p</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.coinSilver}
+          onPress={() => handleCoinPress('Ten Pence', '10p')}
+          accessible={true}
+          accessibilityLabel="Ten pence coin">
+          <Text style={styles.coinText}>10p</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.coinSilverPolygon}
+          onPress={() => handleCoinPress('Fifty Pence', '50p')}
+          accessible={true}
+          accessibilityLabel="Fifty pence coin">
+          <Text style={styles.coinText}>50p</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+// --- APP NAVIGATION SETUP ---
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Hub" component={HubScreen} />
+        <Stack.Screen name="LearningRoom" component={LearningRoomScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+// --- VISUAL STYLES ---
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  titleText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  subtitleText: {
+    fontSize: 20,
+    color: '#555',
+    marginBottom: 30,
+  },
+  chunkyButton: {
+    backgroundColor: '#fff',
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    marginVertical: 10,
+    width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333',
+  },
+  starJar: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    backgroundColor: '#FFF',
+    padding: 10,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#FFD700',
+  },
+  starText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  coinRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginTop: 20,
+  },
+  coinBronze: {
+    backgroundColor: '#CD7F32',
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  coinSilver: {
+    backgroundColor: '#C0C0C0',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  coinSilverPolygon: {
+    backgroundColor: '#C0C0C0',
+    width: 90,
+    height: 90,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  coinText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+});
