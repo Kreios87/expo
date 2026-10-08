@@ -45,7 +45,9 @@ export function StarPopup({ message, onHide }: StarPopupProps) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 70,
+    // Anchored to the bottom rather than the top so it can never overlap a
+    // screen's header text, regardless of how long that screen's title/subtitle run.
+    bottom: 40,
     alignSelf: 'center',
     backgroundColor: colors.gold,
     paddingHorizontal: 20,
