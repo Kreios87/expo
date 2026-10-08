@@ -2,11 +2,13 @@
   "expo": {
     "name": "How Money Works",
     "slug": "money-learning-app",
+    "scheme": "money-learning-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": false
-    }
+    },
+    "plugins": ["expo-router"]
   }
 }

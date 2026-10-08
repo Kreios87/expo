@@ -2,21 +2,25 @@
   "name": "money-learning-app",
   "private": true,
   "version": "1.0.0",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios"
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/native": "^7.1.33",
-    "@react-navigation/native-stack": "^7.14.5",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "workspace:*",
+    "expo-router": "workspace:*",
+    "expo-linking": "workspace:*",
     "react": "19.2.3",
     "react-native": "0.85.3",
     "react-native-safe-area-context": "5.6.2",
     "react-native-screens": "~4.23.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "workspace:*"
+    "babel-preset-expo": "workspace:*",
+    "typescript": "^5.3.0"
   }
 }
